@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">TetrisTexto</string>
+    <string name="mover_izq">izq</string>
+    <string name="mover_der">der</string>
+    <string name="mover_abajo">abajo</string>
+    <string name="rotar">rotar</string>
+
+
+</resources>
