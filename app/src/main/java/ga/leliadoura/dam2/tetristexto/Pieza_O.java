@@ -5,7 +5,7 @@ public class Pieza_O extends Pieza {
     public Pieza_O() {
         estado = 0;
         pieza = new char[4][4];
-       // pieza = generar(estado);
+       pieza = generar(estado);
     }
 
     @Override
@@ -43,13 +43,31 @@ public class Pieza_O extends Pieza {
     public char[][] generar(int estado){
         switch (estado) {
             case 0:
+                pieza[0][0] = 'O';	pieza[0][1] = 'O';	pieza[0][2] = ' ';	pieza[0][3] = ' ';
+                pieza[1][0] = 'O';	pieza[1][1] = 'O';	pieza[1][2] = ' ';	pieza[1][3] = ' ';
+                pieza[2][0] = ' ';	pieza[2][1] = ' ';	pieza[2][2] = ' ';	pieza[2][3] = ' ';
+                pieza[3][0] = ' ';	pieza[3][1] = ' ';	pieza[3][2] = ' ';	pieza[3][3] = ' ';
+
+                break;
             case 1:
+                pieza[0][0] = 'O';	pieza[0][1] = 'O';	pieza[0][2] = ' ';	pieza[0][3] = ' ';
+                pieza[1][0] = 'O';	pieza[1][1] = 'O';	pieza[1][2] = ' ';	pieza[1][3] = ' ';
+                pieza[2][0] = ' ';	pieza[2][1] = ' ';	pieza[2][2] = ' ';	pieza[2][3] = ' ';
+                pieza[3][0] = ' ';	pieza[3][1] = ' ';	pieza[3][2] = ' ';	pieza[3][3] = ' ';
+
+                break;
             case 2:
+                pieza[0][0] = 'O';	pieza[0][1] = 'O';	pieza[0][2] = ' ';	pieza[0][3] = ' ';
+                pieza[1][0] = 'O';	pieza[1][1] = 'O';	pieza[1][2] = ' ';	pieza[1][3] = ' ';
+                pieza[2][0] = ' ';	pieza[2][1] = ' ';	pieza[2][2] = ' ';	pieza[2][3] = ' ';
+                pieza[3][0] = ' ';	pieza[3][1] = ' ';	pieza[3][2] = ' ';	pieza[3][3] = ' ';
+
+                break;
             case 3:
-                pieza[0][0] = 'O';	pieza[1][0] = 'O';	pieza[2][0] = ' ';	pieza[3][0] = ' ';
-                pieza[0][1] = 'O';	pieza[1][1] = 'O';	pieza[2][1] = ' ';	pieza[3][1] = ' ';
-                pieza[0][2] = ' ';	pieza[1][2] = ' ';	pieza[2][2] = ' ';	pieza[3][2] = ' ';
-                pieza[0][3] = ' ';	pieza[1][3] = ' ';	pieza[2][3] = ' ';	pieza[3][3] = ' ';
+                pieza[0][0] = 'O';	pieza[0][1] = 'O';	pieza[0][2] = ' ';	pieza[0][3] = ' ';
+                pieza[1][0] = 'O';	pieza[1][1] = 'O';	pieza[1][2] = ' ';	pieza[1][3] = ' ';
+                pieza[2][0] = ' ';	pieza[2][1] = ' ';	pieza[2][2] = ' ';	pieza[2][3] = ' ';
+                pieza[3][0] = ' ';	pieza[3][1] = ' ';	pieza[3][2] = ' ';	pieza[3][3] = ' ';
 
                 break;
         }

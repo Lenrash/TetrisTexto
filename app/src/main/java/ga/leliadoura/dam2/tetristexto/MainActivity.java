@@ -9,10 +9,8 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private char[][] fondo, pieza;
     private EditText area;
     private Button rotar, moverIzq, moverDer, moverAbajo;
-    private Pieza[] oPieza;
     private T1 t1;
 
 
@@ -22,34 +20,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         area = (EditText)findViewById(R.id.area);
-        fondo = new char[20][10];
-        
-        Log.i("valor",fondo[1].toString());
-
-        fondo = fill_array_blank(fondo);
-
-        oPieza = new Pieza[7];
-        oPieza[0] = new Pieza_O();
-        oPieza[1] = new Pieza_I();
-        oPieza[2] = new Pieza_Z();
-        oPieza[3] = new Pieza_T();
-        oPieza[4] = new Pieza_J();
-        oPieza[5] = new Pieza_L();
-        oPieza[6] = new Pieza_S();
-
-        int x = (int)(Math.random()*7);
-
-        oPieza[x].obtenerPieza();
-        pieza = oPieza[x].pieza;
-
-
-        fondo = inserta_pieza(fondo, pieza);
-
-        for(int i = 0; i< fondo.length;i++){
-            String str = new String(fondo[i]);
-            area.append(str + "\n");
-        }
-
 
         rotar = (Button)findViewById(R.id.b_rotar);
         moverIzq = (Button)findViewById(R.id.b_moverIzq);
@@ -61,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         moverAbajo.setOnClickListener(this);
         moverIzq.setOnClickListener(this);
 
+        t1 = new T1();
+        t1.start();
     }
 
     @Override
@@ -76,35 +48,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                break;
        }
      }
-
-    private char[][] fill_array_blank(char[][] ch_array){
-        for (int i = 0;i < ch_array.length; i++){
-            for (int j = 0; j < ch_array[i].length; j++){
-                ch_array[i][j] = ' ';
-                /*if(j == 0 || j == 11)
-                    ch_array[i][j] = '|';
-                if(i == 20)
-                    ch_array[i][j] = '_';*/
-            }
-        }
-        return ch_array;
-    }
-
-    private char[][] inserta_pieza(char[][] ch_array, char[][] pieza){
-        int x, y;
-        x = 0;
-        y = 0;
-
-        for(int i = 0; i < 4; i++){
-            for(int j = 4; j < 8; j++){
-                ch_array[i][j] = pieza[x][y];
-                y++;
-            }
-            x++;
-            y = 0;
-        }
-        return ch_array;
-    }
-
 
 }
