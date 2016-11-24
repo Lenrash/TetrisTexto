@@ -9,6 +9,8 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private Pieza[] oPieza;
+    private Tablero oTablero;
     private EditText area;
     private Button rotar, moverIzq, moverDer, moverAbajo;
     private T1 t1;
@@ -31,7 +33,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         moverAbajo.setOnClickListener(this);
         moverIzq.setOnClickListener(this);
 
-        t1 = new T1();
+        oTablero = new Tablero();
+        oPieza = new Pieza[7];
+
+        t1 = new T1(oPieza, oTablero);
         t1.start();
     }
 
@@ -45,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
            case R.id.b_moverIzq:
                break;
            case R.id.b_rotar:
+
                break;
        }
      }

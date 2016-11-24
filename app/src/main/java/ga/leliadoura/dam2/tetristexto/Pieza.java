@@ -1,8 +1,17 @@
 package ga.leliadoura.dam2.tetristexto;
 
-public class Pieza {
+public abstract class Pieza {
 
     public char pieza[][];  //<-- Para guardar la pieza
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
     int estado;             //<- Para guardar el estado de la pieza (4 posiciones)
     int i;                  //<- Para generar un numero aleatorio
     int pos_x;              //<- Para guardar la posicion actual de la pieza en el Tablero
@@ -11,13 +20,12 @@ public class Pieza {
     //Cuando se crea la pieza se asigna la posicion por defecto que tendra en el tablero
     public Pieza() {
         pos_x = 0;
-        pos_y = 4;
-        //Se añade una pieza aleatoria al char array
+        pos_y = 3;
+
     }
 
     //Cuando se llame a este metodo, se ejecutará el correspondiente de la subclase
-    public void girar() {
-    }
+    public abstract void girar();
 
     //Imprime por consola la pieza
     @Override
