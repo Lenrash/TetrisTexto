@@ -2,48 +2,76 @@ package ga.leliadoura.dam2.tetristexto;
 
 public abstract class Pieza {
 
-    char pieza[][];         //<-- Para guardar la pieza
-    int estado;             //<- Para guardar el estado de la pieza (4 posiciones)
-    int fila;               //<- Para guardar la posicion actual de la pieza en el Tablero
-    int columna;
+    private char pieza[][];         //<-- Para guardar la pieza
+    private int estado;             //<- Para guardar el estado de la pieza (4 posiciones)
+    private int fila;               //<- Para guardar la posicion actual de la pieza en el Tablero
+    private int columna;
 
     /**
      * Cuando se crea la pieza se asigna la posicion por defecto que tendra en el tablero
      * y el estado en el que se va a generar la pieza.
      */
     public Pieza() {
-        pieza = new char[4][4];
+        pieza = new char[21][10];
         estado = 0;
         fila = 0;
         columna = 4;
+        generarPieza(pieza, estado);
     }
 
 
     /**
      * Para girar la posicion de la pieza.
-     * Cuando se llame a este metodo, se ejecutará el correspondiente de la subclase.
+     * Cuando se llame a este metodo, se ejecutará el metodo generarPieza correspondiente de la subclase
+     * dependiendo de la Pieza y del estado en el que se encuentre.
      */
-    public abstract void girar();
+    public void girar() {
+        switch (estado) {
+            case 0:
+                estado++;
+                generarPieza(pieza, estado);
+                break;
+            case 1:
+                estado++;
+                generarPieza(pieza, estado);
+                break;
+            case 2:
+                estado++;
+                generarPieza(pieza, estado);
+                break;
+            case 3:
+                estado = 0;
+                generarPieza(pieza, estado);
+                break;
+        }
+    }
+
+    /**
+     * Genera unha pieza dependiendo del estado en el que se encuentre y la guarda en el array de caracteres.
+     * @param pieza array de caracteres en el que se guarda la pieza
+     * @param estado estado en el que se guarda la pieza.
+     */
+    public abstract void generarPieza(char[][] pieza, int estado);
 
     /**
      * Mueve la pieza una (+1) posicion Vertical hacia Abajo.
      */
     public void bajar(){
-        fila = fila + 1;
+        setFila(getFila()+1);
     }
 
     /**
      * Mueve la pieza una (+1) posicion Horizontal hacia la Derecha.
      */
     public void mover_der(){
-        columna = columna + 1;
+        setColumna(getColumna()+1);
     }
 
     /**
      * Mueve la pieza una (-1) posicion Horizontal hacia la Izquierda.
      */
     public void mover_izq(){
-        columna = columna - 1;
+        setColumna(getColumna()-1);
     }
 
     //-------GETTERS Y SETTERS--------
@@ -79,6 +107,7 @@ public abstract class Pieza {
     public void setEstado(int estado) {
         this.estado = estado;
     }
+
 
     //Imprime por consola la pieza
     @Override

@@ -3,42 +3,11 @@ package ga.leliadoura.dam2.tetristexto;
 public class Pieza_S extends Pieza {
 
     public Pieza_S() {
-        pieza = generar(estado);
+        super();
     }
 
-    @Override
-    public void girar() {
-        switch (estado) {
-            case 0:
-                estado++;
-                pieza = generar(estado);
-                break;
-            case 1:
-                estado++;
-                pieza = generar(estado);
-                break;
-            case 2:
-                estado++;
-                pieza = generar(estado);
-                break;
-            case 3:
-                estado = 0;
-                pieza = generar(estado);
-                break;
-        }
-    }
 
-    @Override
-    public String toString() {
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++)
-                System.out.print(pieza[i][j]);
-            System.out.println();
-        }
-        return null;
-    }
-
-    public char[][] generar(int estado){
+    public void generarPieza(char[][] pieza, int estado){
         switch (estado) {
             case 0:
 
@@ -60,7 +29,7 @@ public class Pieza_S extends Pieza {
                 break;
 
         }
-        return pieza;
+        //return pieza;
     }
 
 }

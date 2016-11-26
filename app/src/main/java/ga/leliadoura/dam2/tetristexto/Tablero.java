@@ -6,7 +6,7 @@ public class Tablero {
     public char[][] tablero_a;
     public char[][] tablero_b;
     public char[][] tablero_c;
-    private boolean cargar_tablero;
+    //private boolean cargar_tablero;
     //boolean introducir_pieza;
 
     /**
@@ -25,7 +25,7 @@ public class Tablero {
                 }else {
                     tablero_a[f][c] = '0';
                     tablero_b[f][c] = '0';
-                    tablero_c[f][c] = '-';
+                    tablero_c[f][c] = '0';
                 }
             }
     }
@@ -39,10 +39,11 @@ public class Tablero {
     public boolean comprobarEspacio(Pieza oPieza) {
         int i = 0;
         int j = 0;
+        char[][] pieza = oPieza.getPieza();
 
         for (int f = oPieza.getFila(); f < oPieza.getFila() + 4; f++) {
             for (int c = oPieza.getColumna(); c < oPieza.getColumna() + 4; c++) {
-                if (oPieza.pieza[i][j] != '0' && (tablero_a[f][c] != '0')) {
+                if (pieza[i][j] != '0' && (tablero_a[f][c] != '0')) {
                     System.out.println("No se puede colocar pieza");
                     guardarTableroAenB(tablero_c, tablero_a);
                     return false;
@@ -56,13 +57,6 @@ public class Tablero {
     }
 
 
-    /**
-     * Rellena tablero con ceros cuando se inicia el juego o carga el estado del tablero guardado.
-     */
-
-
-
-
 
     /**
      * Inserta la pieza pasada por parametro en el tablero.
@@ -70,14 +64,14 @@ public class Tablero {
      * @param oPieza
      */
     public void insertarPieza(Pieza oPieza) {
-
         int i = 0;
         int j = 0;
+        char[][] pieza = oPieza.getPieza();
 
         for (int f = oPieza.getFila(); f < oPieza.getFila() +4; f++) {
             for (int c = oPieza.getColumna(); c < oPieza.getColumna() +4; c++) {
-                if (oPieza.pieza[i][j] != '0')
-                    tablero_b[f][c] = oPieza.pieza[i][j];
+                if (pieza[i][j] != '0')
+                    tablero_b[f][c] = pieza[i][j];
                 j++;
             }
             j = 0;
@@ -88,9 +82,7 @@ public class Tablero {
     }
 
     /**
-     * Genera una copia del estado actual del tablero
-     * y pone la variable cargar_tablero a true indicando que se deber cargar
-     * el tablero cuando se llame al metodo
+     * Para generarPieza una copia del estado actual del tablero
      */
     public void guardarTableroAenB(char[][] copiarA, char[][] enB) {
         for (int f = 0; f < copiarA.length; f++)
