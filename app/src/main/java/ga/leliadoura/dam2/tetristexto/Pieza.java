@@ -2,78 +2,49 @@ package ga.leliadoura.dam2.tetristexto;
 
 public abstract class Pieza {
 
-    public char pieza[][];  //<-- Para guardar la pieza
-
-    public int getEstado() {
-        return estado;
-    }
-
-    public void setEstado(int estado) {
-        this.estado = estado;
-    }
-
+    char pieza[][];         //<-- Para guardar la pieza
     int estado;             //<- Para guardar el estado de la pieza (4 posiciones)
-    int i;                  //<- Para generar un numero aleatorio
-    int pos_x;              //<- Para guardar la posicion actual de la pieza en el Tablero
-    int pos_y;
+    int fila;               //<- Para guardar la posicion actual de la pieza en el Tablero
+    int columna;
 
-    //Cuando se crea la pieza se asigna la posicion por defecto que tendra en el tablero
+    /**
+     * Cuando se crea la pieza se asigna la posicion por defecto que tendra en el tablero
+     * y el estado en el que se va a generar la pieza.
+     */
     public Pieza() {
-        pos_x = 0;
-        pos_y = 3;
-
+        pieza = new char[4][4];
+        estado = 0;
+        fila = 0;
+        columna = 4;
     }
 
-    //Cuando se llame a este metodo, se ejecutará el correspondiente de la subclase
+
+    /**
+     * Para girar la posicion de la pieza.
+     * Cuando se llame a este metodo, se ejecutará el correspondiente de la subclase.
+     */
     public abstract void girar();
 
-    //Imprime por consola la pieza
-    @Override
-    public String toString() {
-        for (int i = 0; i < pieza.length; i++) {
-            for (int j = 0; j < pieza[i].length; j++)
-                System.out.print(pieza[i][j]);
-            System.out.print("\n");
-        }
-        return null;
+    /**
+     * Mueve la pieza una (+1) posicion Vertical hacia Abajo.
+     */
+    public void bajar(){
+        fila = fila + 1;
     }
 
-    //Genera una pieza aleatoria y la asigna al array
-   /* private char[][] obtenerPieza() {
-        i = (int) (Math.random() * 7);
-        switch (i) {
-            case 0:
-                Pieza_O po = new Pieza_O();
-                pieza = po.generar(0);
-                break;
-            case 1:
-                Pieza_I pi = new Pieza_I();
-                pieza = pi.generar(0);
-                break;
-            case 2:
-                Pieza_J pj = new Pieza_J();
-                pieza = pj.generar(0);
-                break;
-            case 3:
-                Pieza_L pl = new Pieza_L();
-                pieza = pl.generar(0);
-                break;
-            case 4:
-                Pieza_S ps = new Pieza_S();
-                pieza = ps.generar(0);
-                break;
-            case 5:
-                Pieza_T pt = new Pieza_T();
-                pieza = pt.generar(0);
-                break;
-            case 6:
-                Pieza_Z pz = new Pieza_Z();
-                pieza = pz.generar(0);
-                break;
-        }
-    return pieza;
+    /**
+     * Mueve la pieza una (+1) posicion Horizontal hacia la Derecha.
+     */
+    public void mover_der(){
+        columna = columna + 1;
     }
-*/
+
+    /**
+     * Mueve la pieza una (-1) posicion Horizontal hacia la Izquierda.
+     */
+    public void mover_izq(){
+        columna = columna - 1;
+    }
 
     //-------GETTERS Y SETTERS--------
 
@@ -85,20 +56,39 @@ public abstract class Pieza {
         this.pieza = pieza;
     }
 
-    public int getPos_x() {
-        return pos_x;
+    public int getFila() {
+        return fila;
     }
 
-    public void setPos_x(int pos_x) {
-        this.pos_x = pos_x;
+    public void setFila(int fila) {
+        this.fila = fila;
     }
 
-    public int getPos_y() {
-        return pos_y;
+    public int getColumna() {
+        return columna;
     }
 
-    public void setPos_y(int pos_y) {
-        this.pos_y = pos_y;
+    public void setColumna(int columna) {
+        this.columna = columna;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
+    //Imprime por consola la pieza
+    @Override
+    public String toString() {
+        for (int i = 0; i < pieza.length; i++) {
+            for (int j = 0; j < pieza[i].length; j++)
+                System.out.print(pieza[i][j]);
+            System.out.print("\n");
+        }
+        return null;
     }
 
 }

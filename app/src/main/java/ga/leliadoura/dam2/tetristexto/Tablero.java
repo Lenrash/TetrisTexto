@@ -3,90 +3,116 @@ package ga.leliadoura.dam2.tetristexto;
 
 public class Tablero {
 
-    public char[][] tablero = new char[22][10];
-    public char[][] aux = new char[22][10];
-    private boolean cargar_tablero = false;
-    boolean introducir_pieza = true;
+    public char[][] tablero_a;
+    public char[][] tablero_b;
+    public char[][] tablero_c;
+    private boolean cargar_tablero;
+    //boolean introducir_pieza;
 
+    /**
+     * Genenra un tablero y llama al metodo llenarTablero() para poner
+     */
     public Tablero() {
-        llenarTablero();
+        tablero_a = new char[21][10];
+        tablero_b = new char[21][10];
+        tablero_c = new char[21][10];
+        for (int f = 0; f < tablero_a.length; f++)
+            for (int c = 0; c < tablero_a[f].length; c++) {
+                if (f >= 20) {
+                    tablero_a[f][c] = '-';
+                    tablero_b[f][c] = '-';
+                    tablero_c[f][c] = '-';
+                }else {
+                    tablero_a[f][c] = '0';
+                    tablero_b[f][c] = '0';
+                    tablero_c[f][c] = '-';
+                }
+            }
     }
 
-    //Comprueba si la pieza se puede introducir en el tablero.
+    /**
+     * Comprueba si la pieza se puede introducir en el tablero.
+     *
+     * @param oPieza objeto pieza que se comprueba con el tablero.
+     * @return <b>true</b> si se puede colocar. <b>false</b> si una de las posiciones esta ocupada.
+     */
     public boolean comprobarEspacio(Pieza oPieza) {
-        int i, j;
-        i = 0;
-        j = 0;
-        //llenarTablero();
-        for (int x = oPieza.getPos_x(); x < oPieza.getPos_x() + 4; x++) {
-            for (int y = oPieza.getPos_y(); y < oPieza.getPos_y() + 4; y++) {
-                if (oPieza.pieza[i][j] != '0') {
-                    if (tablero[x + 1][y] != '0') {                                                                        //Si el tablero y la pieza tienen la posicion
-                        System.out.println("No se puede colocar pieza");                                                  //ocupada, no se puede insertar la pieza
-                        return introducir_pieza = false;
-                    }
+        int i = 0;
+        int j = 0;
+
+        for (int f = oPieza.getFila(); f < oPieza.getFila() + 4; f++) {
+            for (int c = oPieza.getColumna(); c < oPieza.getColumna() + 4; c++) {
+                if (oPieza.pieza[i][j] != '0' && (tablero_a[f][c] != '0')) {
+                    System.out.println("No se puede colocar pieza");
+                    guardarTableroAenB(tablero_c, tablero_a);
+                    return false;
                 }
                 j++;
             }
             j = 0;
             i++;
-
         }
-        return introducir_pieza = true;
+        return true;
     }
 
 
-    //Rellena tablero con ceros o se carga el guardado.
-    public void llenarTablero() {
-        if (cargar_tablero == true) {
-            for (int i = 0; i < tablero.length; i++)
-                for (int j = 0; j < tablero[i].length; j++)
-                    tablero[i][j] = aux[i][j];
-            //cargar_tablero = false;
-        } else {
-            for (int i = 0; i < tablero.length; i++)
-                for (int j = 0; j < tablero[i].length; j++) {
-                    if (i >= 20)
-                        tablero[i][j] = '-';
-                    else
-                        tablero[i][j] = '0';
-                }
-        }
-    }
+    /**
+     * Rellena tablero con ceros cuando se inicia el juego o carga el estado del tablero guardado.
+     */
 
+
+
+
+
+    /**
+     * Inserta la pieza pasada por parametro en el tablero.
+     *
+     * @param oPieza
+     */
     public void insertarPieza(Pieza oPieza) {
-        int i, j;
-        i = oPieza.pieza.length - 1;
-        j = oPieza.pieza.length - 1;
 
-        for (int x = oPieza.getPos_x() + 4; x > oPieza.getPos_x(); x--) {
-            for (int y = oPieza.getPos_y() + 4; y > oPieza.getPos_y(); y--) {
+        int i = 0;
+        int j = 0;
+
+        for (int f = oPieza.getFila(); f < oPieza.getFila() +4; f++) {
+            for (int c = oPieza.getColumna(); c < oPieza.getColumna() +4; c++) {
                 if (oPieza.pieza[i][j] != '0')
-                    tablero[x][y] = oPieza.pieza[i][j];
-                j--;
+                    tablero_b[f][c] = oPieza.pieza[i][j];
+                j++;
             }
-            j = oPieza.pieza.length - 1;
-            i--;
+            j = 0;
+            i++;
         }
+        guardarTableroAenB(tablero_b, tablero_c);
 
     }
 
+    /**
+     * Genera una copia del estado actual del tablero
+     * y pone la variable cargar_tablero a true indicando que se deber cargar
+     * el tablero cuando se llame al metodo
+     */
+    public void guardarTableroAenB(char[][] copiarA, char[][] enB) {
+        for (int f = 0; f < copiarA.length; f++)
+            for (int c = 0; c < copiarA[f].length; c++) {
+                    enB[f][c] = copiarA[f][c];
+                }
 
-    public void guardarEstadoTablero() {
-        for (int i = 0; i < tablero.length; i++)
-            for (int j = 0; j < tablero[i].length; j++)
-                aux[i][j] = tablero[i][j];
-        cargar_tablero = true;
     }
 
-
+     /**
+     * Imprime por consola el estado del tablero
+     *
+     * @return null
+     */
     @Override
     public String toString() {
-        for (int i = 0; i < tablero.length; i++) {
-            for (int j = 0; j < tablero[i].length; j++)
-                System.out.print(tablero[i][j]);
+        for (int f = 0; f < tablero_b.length; f++) {
+            for (int c = 0; c < tablero_b[f].length; c++)
+                System.out.print(tablero_b[f][c]);
             System.out.print("\n");
         }
+        guardarTableroAenB(tablero_a,tablero_b);
         return null;
     }
 

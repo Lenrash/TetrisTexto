@@ -3,8 +3,6 @@ package ga.leliadoura.dam2.tetristexto;
 public class Pieza_L extends Pieza {
 
     public Pieza_L() {
-        estado = 0;
-        pieza = new char[4][4];
         pieza = generar(estado);
     }
 
