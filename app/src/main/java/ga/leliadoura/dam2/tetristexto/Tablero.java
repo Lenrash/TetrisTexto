@@ -1,13 +1,13 @@
 package ga.leliadoura.dam2.tetristexto;
 
 
+import android.widget.EditText;
+
 public class Tablero {
 
     public char[][] tablero_a;
     public char[][] tablero_b;
     public char[][] tablero_c;
-    //private boolean cargar_tablero;
-    //boolean introducir_pieza;
 
     /**
      * Genenra un tablero y llama al metodo llenarTablero() para poner
@@ -45,6 +45,7 @@ public class Tablero {
             for (int c = oPieza.getColumna(); c < oPieza.getColumna() + 4; c++) {
                 if (pieza[i][j] != '0' && (tablero_a[f][c] != '0')) {
                     System.out.println("No se puede colocar pieza");
+                    comprobarFilas();
                     guardarTableroAenB(tablero_c, tablero_a);
                     return false;
                 }
@@ -92,6 +93,29 @@ public class Tablero {
 
     }
 
+    public void comprobarFilas(){
+        int cont;
+        for(int f = 0; f < tablero_c.length-1; f++){ //-1 porque la ultima fila es ---------
+            cont = 0;
+            if(tablero_c[f][0] != '0')
+                for(int c = 0; c < tablero_c[f].length; c++)
+                    if (tablero_c[f][c] != '0') {
+                        cont++;
+                        if (cont == tablero_c[f].length)
+                            eliminarLinea(tablero_c, f);
+
+                    }
+
+
+        }
+    }
+
+    private void eliminarLinea(char[][] tablero, int fila){
+        for(int f = fila; f > 0; f--)
+            tablero[f] = tablero[f-1];
+
+    }
+
      /**
      * Imprime por consola el estado del tablero
      *
@@ -104,7 +128,7 @@ public class Tablero {
                 System.out.print(tablero_b[f][c]);
             System.out.print("\n");
         }
-        guardarTableroAenB(tablero_a,tablero_b);
+        guardarTableroAenB(tablero_a, tablero_b);
         return null;
     }
 

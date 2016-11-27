@@ -1,15 +1,18 @@
 package ga.leliadoura.dam2.tetristexto;
 
 
+import android.widget.EditText;
+
 public class Hilo extends Thread {
     private Pieza oPieza;
     private Tablero oTablero;
     private int r;
 
 
-    public Hilo(Pieza pieza, Tablero tablero) {
+
+
+    public Hilo(Tablero tablero) {
         oTablero = tablero;
-        oPieza = pieza;
     }
 
     public synchronized void run() {
@@ -39,6 +42,7 @@ public class Hilo extends Thread {
                 break;
         }
 
+
         while (oTablero.comprobarEspacio(oPieza)) {
             oTablero.insertarPieza(oPieza);
             oTablero.toString();
@@ -49,8 +53,14 @@ public class Hilo extends Thread {
                 e.printStackTrace();
             }
             oPieza.bajar();
+
         }
-    run();
+        run();
+    }
+
+
+    public Pieza getoPieza() {
+        return oPieza;
     }
 }
 
