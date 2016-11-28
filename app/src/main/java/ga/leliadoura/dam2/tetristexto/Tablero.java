@@ -5,9 +5,11 @@ import android.widget.EditText;
 
 public class Tablero {
 
-    public char[][] tablero_a;
-    public char[][] tablero_b;
-    public char[][] tablero_c;
+    private char[][] tablero_a;
+    private char[][] tablero_b;
+    private char[][] tablero_c;
+    public static final int BORDE_DERECHO = 10;
+    public static final int BORDE_IZQUIERDO = 0;
 
     /**
      * Genenra un tablero y llama al metodo llenarTablero() para poner
@@ -123,13 +125,31 @@ public class Tablero {
      */
     @Override
     public String toString() {
-        for (int f = 0; f < tablero_b.length; f++) {
-            for (int c = 0; c < tablero_b[f].length; c++)
-                System.out.print(tablero_b[f][c]);
-            System.out.print("\n");
+
+        StringBuilder builder = new StringBuilder();
+        for(int i = 0; i < tablero_c.length; i++){
+            for(int j = 0; j < tablero_c[i].length; j++){
+                if(tablero_c[i][j] == '0')
+                    builder.append('_');
+                else
+                    builder.append(tablero_c[i][j]);
+            }
+            builder.append("\n");
         }
         guardarTableroAenB(tablero_a, tablero_b);
-        return null;
+
+        return builder.toString();
+    }
+
+    public char[][] getTablero_b() {
+        return tablero_b;
+    }
+
+    public boolean fin(){
+        for(int c = 0; c < tablero_c[0].length; c++)
+            if (tablero_c[0][c] != '0')
+                return true;
+        return false;
     }
 
 }

@@ -23,9 +23,11 @@
             android:focusable="false"
             android:lines="22"
             android:lineSpacingMultiplier="0.90"
+            android:letterSpacing="1"
             android:textColor="#000000"
             android:background="#FFFFFF"
             android:gravity="top"
+
             />
 
         <LinearLayout

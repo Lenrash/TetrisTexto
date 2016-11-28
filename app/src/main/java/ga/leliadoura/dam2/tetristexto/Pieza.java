@@ -7,6 +7,8 @@ public abstract class Pieza {
     private int fila;               //<- Para guardar la posicion actual de la pieza en el Tablero
     private int columna;
 
+    private int tamaño;
+
     /**
      * Cuando se crea la pieza se asigna la posicion por defecto que tendra en el tablero
      * y el estado en el que se va a generar la pieza.
@@ -52,6 +54,12 @@ public abstract class Pieza {
      * @param estado estado en el que se guarda la pieza.
      */
     public abstract void generarPieza(char[][] pieza, int estado);
+
+    /**
+     * Devuelve el espacio que ocupará la siguiente pieza del orden de rotacion.
+     * @return numero de espacios
+     */
+    public abstract int getTamañoSiguientePieza();
 
     /**
      * Mueve la pieza una (+1) posicion Vertical hacia Abajo.
@@ -108,6 +116,13 @@ public abstract class Pieza {
         this.estado = estado;
     }
 
+    public int getTamaño() {
+        return tamaño;
+    }
+
+    public void setTamaño(int tamaño) {
+        this.tamaño = tamaño;
+    }
 
     //Imprime por consola la pieza
     @Override
