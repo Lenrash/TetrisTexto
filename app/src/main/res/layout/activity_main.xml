@@ -19,7 +19,7 @@
             android:id="@+id/area"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textMultiLine|none"
+            android:inputType="textMultiLine|none|textNoSuggestions"
             android:focusable="false"
             android:lines="22"
             android:lineSpacingMultiplier="0.90"

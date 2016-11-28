@@ -82,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 area.setText(oTablero.toString());
                             }
                         });
-
                         oPieza.bajar();
                     }
                 }
@@ -98,7 +97,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (v.getId()) {
             case R.id.b_moverAbajo:
-                oPieza.bajar();
+                while(oTablero.comprobarEspacio(oPieza)){
+                    oPieza.bajar();
+                }
+                oTablero.insertarPieza(oPieza);
                 break;
             case R.id.b_moverDer:
                 if (oPieza.getColumna() + oPieza.getTamaño() < Tablero.BORDE_DERECHO)
