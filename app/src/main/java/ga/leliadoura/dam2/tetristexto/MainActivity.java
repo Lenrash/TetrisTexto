@@ -1,7 +1,11 @@
 package ga.leliadoura.dam2.tetristexto;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Thread hilo = new Thread() {
 
-            public void run() {
+            public synchronized void run() {
                 while (oTablero.fin() == false) {
 
                     r = (int) (Math.random() * 7);
@@ -78,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         runOnUiThread(new Runnable() {
                             @Override
-                            public void run() {
+                            public synchronized void run() {
                                 area.setText(oTablero.toString());
                             }
                         });
@@ -93,13 +97,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onClick(View v) {
+    public synchronized void onClick(View v) {
 
         switch (v.getId()) {
             case R.id.b_moverAbajo:
                 while(oTablero.comprobarEspacio(oPieza)){
                     oPieza.bajar();
                 }
+                oPieza.setFila(oPieza.getFila()-1);
                 oTablero.insertarPieza(oPieza);
                 break;
             case R.id.b_moverDer:
@@ -118,4 +123,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_opciones, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.reiniciar:
+                finish();
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.salir:
+                System.exit(0);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Dialog alert = new Dialog();
+        alert.show(getFragmentManager(), "Dialog");
+    }
 }

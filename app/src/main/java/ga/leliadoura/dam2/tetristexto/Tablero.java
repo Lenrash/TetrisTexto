@@ -141,10 +141,6 @@ public class Tablero {
         return builder.toString();
     }
 
-    public char[][] getTablero_b() {
-        return tablero_b;
-    }
-
     public boolean fin(){
         for(int c = 0; c < tablero_c[0].length; c++)
             if (tablero_c[0][c] != '0')

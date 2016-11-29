@@ -4,6 +4,11 @@
     <string name="mover_der">der</string>
     <string name="mover_abajo">abajo</string>
     <string name="rotar">rotar</string>
+    <string name="reiniciar">Reinciar</string>
+    <string name="salir">Salir</string>
+    <string name="desea_salir">Salir?</string>
+    <string name="si">si</string>
+    <string name="no">no</string>
 
 
 </resources>
